@@ -22,8 +22,14 @@ function displayTimesTemperaturesThens(url) {
         console.log(data.hourly.temperature_2m)
     })
 }
-displayTimesTemperatures(url);
-console.log("after displaying data")
+// displayTimesTemperatures(url);
+// console.log("after displaying data")
+const currentDate = new Date();
+console.log(currentDate.toISOString().substring(0,10));
+const day = currentDate.getDate();
+currentDate.setDate(day + 17);
+console.log("date after 17 days", currentDate.toISOString().substring(0,10));
+
 
 
 
