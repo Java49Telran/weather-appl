@@ -29,6 +29,7 @@ dataForm.addHandler((dataFromForm) => {
      const promiseData = weatherProcessor.getData(dataFromForm);
     
     promiseData.then(data => temperatureList.showTemperatures(data));
+    
 })
 
 

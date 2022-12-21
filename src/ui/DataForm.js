@@ -35,7 +35,12 @@ export class DataForm {
             }, {});
             processFun(data);
 
+
         })
+    }
+    doubleNumber(number) {
+      
+        console.log(number * 2) ;
     }
     onChangeDate() {
         this.#dateFromElement.addEventListener('change', this.dateHandler.bind(this));

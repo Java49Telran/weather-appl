@@ -31,31 +31,26 @@ export class WeatherDataProcessor {
         return promiseData.then(data => {
             const times = data.hourly.time;
             const temperatures = data.hourly.temperature_2m;
-            const indexFrom = getIndexOfDate(times, requestObject.dateFrom);
-            const indexTo = getIndexOfDate(times, requestObject.dateTo) + 24;
-            const timesSelectedDates = times.slice(indexFrom, indexTo);
-            const timesSelectedDatesHours = timesSelectedDates.filter((time,index) =>
+            
+            const timesSelectedDatesHours = times.filter((__,index) =>
             {
-                index = index % 24;
-                return index >= requestObject.hourFrom && index <= requestObject.hourTo;
+                const hour = index % 24;
+                return hour >= requestObject.hourFrom && hour<= requestObject.hourTo;
             } )
-            const temperaturesSelectedDates = temperatures.slice(indexFrom, indexTo);
-            const temperaturesDatesHours = temperaturesSelectedDates.filter((time,index) =>
+           
+            const temperaturesDatesHours = temperatures.filter((__,index) =>
             {
-                index = index % 24;
-                return index >= requestObject.hourFrom && index <= requestObject.hourTo;
+                const hour = index % 24;
+                return hour >= requestObject.hourFrom && index <= requestObject.hourTo;
             } )
             const objects = timesSelectedDatesHours.map((dt, index) => {
                 const dateTime = dt.split("T");
-                return {date: dateTime[0], hour: dateTime[1], temperature: temperaturesDatesHours[index]}
+                const res = {date: dateTime[0], hour: dateTime[1], temperature: temperaturesDatesHours[index]}
+                return res
             } )
 
             
            return {city: requestObject.city, objects}
         })
     }
-}
-function getIndexOfDate(times, date) {
-    
-    return times.findIndex(t => t.includes(date));
 }
