@@ -6,20 +6,28 @@ import { WeatherDataProcessor } from "./data/WeatherDataProcessor.js";
 // let longitude=34.851;
 // let start_date="2022-12-18";
 // let end_date="2022-12-19";
-// const baseUrl = "https://api.open-meteo.com/v1/gfs?";
-// const baseParams = "&hourly=temperature_2m&timezone=IST&";
-// const url = `${baseUrl}latitude=${latitude}&longitude=${longitude}${baseParams}start_date=${start_date}&end_date=${end_date}`
+
 // let promiseResponse = fetch(url);
 
 // let promiseData = promiseResponse.then(response=>response.json());
 // let dataProcessing = promiseData.then(data => console.log(data.hourly.time
 //     ))
-const params = {/*required params for form*/};
+// this.#formElement = document.getElementById(params.idForm);
+//        this.#inputElements = document.querySelectorAll(`#${params.idForm} [name]`);
+//        this.#dateFromElement = document.getElementById(params.idDateFrom);
+//        this.#dateToElement = document.getElementById(params.idDateTo);
+//        this.#hourFromElement = document.getElementById(params.idHourFrom);
+//        this.#hourToElement = document.getElementById(params.idHourTo);
+//        this.#errorMessageElem = document.getElementById(params.idErrorMessage);
+const params = {idForm: "data_form", idDateFrom: "date_from", idDateTo: "date_to",
+idHourFrom: "hour_from", idHourTo: "hour_to", idErrorMessage: "error_message"};
 const weatherProcessor = new WeatherDataProcessor();
 const dataForm = new DataForm(params);
-const temperatureList = new TemperaturesList("idList");
+const temperatureList = new TemperaturesList("items-list", "city");
 dataForm.addHandler((dataFromForm) => {
-    const promiseData = weatherProcessor.getData(dataFromForm);
+    console.log(dataFromForm);
+     const promiseData = weatherProcessor.getData(dataFromForm);
+    
     promiseData.then(data => temperatureList.showTemperatures(data));
 })
 
